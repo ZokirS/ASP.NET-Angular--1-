@@ -12,7 +12,7 @@ namespace vega.Mapping
     {
         public MappingProfile()
         {
-            CreateMap<Make, MakeRecourse>();
+            CreateMap<Make, MakeResource>();
             CreateMap<Model, ModelResource>();
         }
     }
