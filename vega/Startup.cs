@@ -18,6 +18,15 @@ namespace vega
         }
 
         public IConfiguration Configuration { get; }
+        public Startup(IWebHostEnvironment env)
+        {
+            var builder= new ConfigurationBuilder()
+            .SetBasePath(env.ContentRootPath)
+            .AddJsonFile("appsettings.json", optional: true)
+            .AddJsonFile($"appsettings.{env.ContentRootPath}.json", optional: true)
+            .AddEnvironmentVariables();
+            Configuration = builder.Build();
+        }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -28,7 +37,7 @@ namespace vega
             {
                 configuration.RootPath = "ClientApp/dist";
             });
-            services.AddDbContext<VegaDbContext>(context => context.UseSqlServer("..."));
+            services.AddDbContext<VegaDbContext>(context => context.UseSqlServer(Configuration.GetConnectionString("Default")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
