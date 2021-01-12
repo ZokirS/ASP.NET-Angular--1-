@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using vega.Persistance;
+using Microsoft.EntityFrameworkCore;
 
 namespace vega
 {
@@ -26,6 +28,7 @@ namespace vega
             {
                 configuration.RootPath = "ClientApp/dist";
             });
+            services.AddDbContext<VegaDbContext>(context => context.UseSqlServer("..."));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
