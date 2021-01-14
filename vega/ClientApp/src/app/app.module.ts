@@ -1,4 +1,4 @@
-import { MakeService } from './services/make.service';
+import { VehicleService } from './services/vehicle.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -12,7 +12,6 @@ import { HomeComponent } from './home/home.component';
 import { CounterComponent } from './counter/counter.component';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { VehicleFormComponent } from './vehicle-form/vehicle-form.component';
-import { FeatureService } from './services/feature.service';
 
 @NgModule({
   declarations: [
@@ -36,8 +35,7 @@ import { FeatureService } from './services/feature.service';
     ])
   ],
   providers: [
-    MakeService, 
-    FeatureService
+    VehicleService
   ],
   bootstrap: [AppComponent]
 })

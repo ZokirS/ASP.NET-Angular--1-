@@ -21,6 +21,7 @@ namespace vega.Migrations
             migrationBuilder.Sql("Insert into Models (Name, MakeId) values ('Make3-ModelA', (Select Id from Makes where Name='Make3'))");
             migrationBuilder.Sql("Insert into Models (Name, MakeId) values ('Make3-ModelB', (Select Id from Makes where Name='Make3'))");
             migrationBuilder.Sql("Insert into Models (Name, MakeId) values ('Make3-ModelC', (Select Id from Makes where Name='Make3'))");
+
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
