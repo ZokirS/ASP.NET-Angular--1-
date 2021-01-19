@@ -29,6 +29,14 @@
     <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Include="..\..\ASP.NET+Angular %25281%2529\vega\Core\Models\Feature.cs" />
+    <Compile Include="..\..\ASP.NET+Angular %25281%2529\vega\Core\Models\Make.cs" />
+    <Compile Include="..\..\ASP.NET+Angular %25281%2529\vega\Core\Models\Model.cs" />
+    <Compile Include="..\..\ASP.NET+Angular %25281%2529\vega\Core\Models\Vehicle.cs" />
+    <Compile Include="..\..\ASP.NET+Angular %25281%2529\vega\Core\Models\VehicleFeature.cs" />
+  </ItemGroup>
+
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
     <!-- Ensure Node.js is installed -->
     <Exec Command="node --version" ContinueOnError="true">

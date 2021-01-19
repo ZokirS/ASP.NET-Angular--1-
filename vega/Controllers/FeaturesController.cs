@@ -21,10 +21,10 @@ namespace vega.Controllers
         }
 
         [HttpGet("/api/vehicle/features")]
-        public async Task<IEnumerable<FeatureResource>> GetFeatures()
+        public async Task<IEnumerable<KeyValuePairResource>> GetFeatures()
         {
             var features = await dbContext.Features.ToListAsync();
-            return mapper.Map<List<Feature>, List<FeatureResource>>(features);
+            return mapper.Map<List<Feature>, List<KeyValuePairResource>>(features);
         }
 
     }
