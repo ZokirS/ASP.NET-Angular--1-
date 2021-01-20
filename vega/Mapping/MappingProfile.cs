@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using vega.Controllers.Resources;
-using vega.Models;
+using vega.Core.Models;
 
 namespace vega.Mapping
 {
@@ -38,33 +38,23 @@ namespace vega.Mapping
 
 
             //API Resource to Domain
-            CreateMap<VehicleResource, Vehicle>()
-                .ForMember(v => v.Id, opt => opt.Ignore())
-                .ForMember(v => v.ContactName, opt => opt.MapFrom(vr => vr.Contact.Name))
-                .ForMember(v => v.ContactEmail, opt => opt.MapFrom(vr => vr.Contact.Email))
-                .ForMember(v => v.ContactPhone, opt => opt.MapFrom(vr => vr.Contact.Phone))
-                .ForMember(v => v.Features, opt => opt.Ignore());
-                //.AfterMap((vr, v) =>
-                //{
-                //    //Remove unselected features
-                //    //var removedfeatures = new list<vehiclefeature>();
-                //    //foreach (var f in v.features)
-                //    //    if (!vr.features.contains(f.featureid))
-                //    //        removedfeatures.add(f);
+            CreateMap<SaveVehicleResource, Vehicle>()
+              .ForMember(v => v.Id, opt => opt.Ignore())
+              .ForMember(v => v.ContactName, opt => opt.MapFrom(vr => vr.Contact.Name))
+              .ForMember(v => v.ContactEmail, opt => opt.MapFrom(vr => vr.Contact.Email))
+              .ForMember(v => v.ContactPhone, opt => opt.MapFrom(vr => vr.Contact.Phone))
+              .ForMember(v => v.Features, opt => opt.Ignore())
+              .AfterMap((vr, v) => {
+                  // Remove unselected features
+                  var removedFeatures = v.Features.Where(f => !vr.Features.Contains(f.FeatureId)).ToList();
+                  foreach (var f in removedFeatures)
+                      v.Features.Remove(f);
 
-                //    var removedFeatures = v.Features.Where(f => !vr.Features.Contains(f.FeatureId));
-
-
-                //    foreach (var f in removedFeatures)
-                //        v.Features.Remove(f);
-
-                //    //Add new features
-
-                //    var addedFeatures = vr.Features.Where(id => !v.Features.Any(f => f.Feature = id)).Select(id=>new VehicleFeature { FeatureId=id});
-                //    foreach (var f in addedFeatures)
-                //        v.Features.Add(f);
-
-                //});
+                  // Add new features
+                  var addedFeatures = vr.Features.Where(id => !v.Features.Any(f => f.FeatureId == id)).Select(id => new VehicleFeature { FeatureId = id }).ToList();
+                  foreach (var f in addedFeatures)
+                      v.Features.Add(f);
+              });
         }
     }
 }

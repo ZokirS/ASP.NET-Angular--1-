@@ -1,8 +1,12 @@
+﻿using Catel.MVVM.Converters;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
+using System.Text.Json.Serialization;
+using System.Threading.Tasks;
 
 namespace vega.Core.Models
 {
@@ -17,13 +21,13 @@ namespace vega.Core.Models
         [StringLength(255)]
         public string ContactName { get; set; }
         [StringLength(255)]
-        public string ContactEmail { get; set; }   
+        public string ContactEmail { get; set; }
         [Required]
-        [StringLength(255)]  
+        [StringLength(255)]
         public string ContactPhone { get; set; }
         public DateTime LastUpdate { get; set; }
 
-        public ICollection<VehicleFeature> Features{ get; set; }
+        public ICollection<VehicleFeature> Features { get; set; }
         public Vehicle()
         {
             Features = new Collection<VehicleFeature>();

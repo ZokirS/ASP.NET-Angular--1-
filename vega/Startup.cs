@@ -8,6 +8,10 @@ using Microsoft.Extensions.Hosting;
 using vega.Persistance;
 using Microsoft.EntityFrameworkCore;
 using AutoMapper;
+using vega.Core;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+using Catel.MVVM.Converters;
 
 namespace vega
 {
@@ -37,6 +41,7 @@ namespace vega
             services.AddAutoMapper();
             services.AddDbContext<VegaDbContext>(context => context.UseSqlServer(Configuration.GetConnectionString("Default")));
             services.AddMvc();
+            services.AddMvc().AddNewtonsoftJson();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -13,7 +13,7 @@ namespace vega.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ModelId = table.Column<int>(type: "int", nullable: false),
+                    ModelId = table.Column<string>(type: "nvarchar(255)", nullable: false),
                     isRegistered = table.Column<bool>(type: "bit", nullable: false),
                     ContactName = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
                     ContactEmail = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),

@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
-using vega.Models;
+using vega.Core.Models;
 using System.Collections.Generic;
 using vega.Persistance;
 using Microsoft.EntityFrameworkCore;

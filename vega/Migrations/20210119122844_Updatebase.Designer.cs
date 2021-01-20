@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using vega.Persistance;
 
 namespace vega.Migrations
 {
     [DbContext(typeof(VegaDbContext))]
-    partial class VegaDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210119122844_Updatebase")]
+    partial class Updatebase
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -99,8 +101,8 @@ namespace vega.Migrations
                     b.Property<DateTime>("LastUpdate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("ModelId")
-                        .HasColumnType("nvarchar(255)");
+                    b.Property<int>("ModelId")
+                        .HasColumnType("int");
 
                     b.Property<bool>("isRegistered")
                         .HasColumnType("bit");
@@ -146,7 +148,7 @@ namespace vega.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Models");
+                    b.Navigation("Model");
                 });
 
             modelBuilder.Entity("vega.Core.Models.VehicleFeature", b =>
