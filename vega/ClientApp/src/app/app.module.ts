@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import {ToastyModule } from 'ng2-toasty';
 import { RouterModule } from '@angular/router';
 
 
@@ -24,6 +25,7 @@ import { VehicleFormComponent } from './vehicle-form/vehicle-form.component';
   ],
   imports: [
     FormsModule,
+    ToastyModule.forRoot(),
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
     
