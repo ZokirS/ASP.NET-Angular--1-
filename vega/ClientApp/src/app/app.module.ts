@@ -30,11 +30,11 @@ import { VehicleFormComponent } from './vehicle-form/vehicle-form.component';
     HttpClientModule,
     
     RouterModule.forRoot([
-      { path: '', component: HomeComponent, pathMatch: 'full' },
-      {path: 'vehicles/new', component: VehicleFormComponent},
-      { path: 'counter', component: CounterComponent },
-      { path: 'fetch-data', component: FetchDataComponent },
-    ])
+    { path: '', component: HomeComponent, pathMatch: 'full' },
+    { path: 'vehicles/new', component: VehicleFormComponent },
+    { path: 'counter', component: CounterComponent },
+    { path: 'fetch-data', component: FetchDataComponent },
+], { relativeLinkResolution: 'legacy' })
   ],
   providers: [
     VehicleService
