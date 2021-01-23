@@ -100,7 +100,7 @@ namespace vega.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("ModelId")
-                        .HasColumnType("nvarchar(255)");
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<bool>("isRegistered")
                         .HasColumnType("bit");
