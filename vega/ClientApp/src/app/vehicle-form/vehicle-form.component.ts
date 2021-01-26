@@ -1,7 +1,9 @@
+import { Observable } from 'rxjs';
 import { VehicleService } from './../services/vehicle.service';
 import { Component, OnInit } from '@angular/core';
 import { ToastyService } from 'ng2-toasty';
 import { ActivatedRoute, Router } from '@angular/router';
+import 'rxjs/add/observable/forkJoin'
 
 @Component({
   selector: 'app-vehicle-form',
@@ -27,20 +29,23 @@ features: any;
    }
 
   ngOnInit() {
-    this.vehicleService.getVehicle(this.vehicle.id)
-    .subscribe(v=>{
-      this.vehicle=v;
-    },
-    err=>{
+
+    var sources = [
+      this.vehicleService.getMakes(),
+      this.vehicleService.getFeatures(),
+    ];
+    if(this.vehicle.id)
+      sources.push(this.vehicleService.getVehicle(this.vehicle.id));
+
+    Observable.forkJoin(sources).subscribe(data=>{
+      this.makes = data[0];
+      this.features = data[1];
+      if(this.vehicle.id)
+        this.vehicle = data[2];
+    }, err=>{
       if(err.status == 404)
       this.router.navigate(['/']);
     });
-
-    this.vehicleService.getMakes().subscribe(makes=>
-    this.makes = makes);
-
-    this.vehicleService.getFeatures().subscribe(features=>
-      this.features=features);
  }
  onMakeChange(){
  var selectedMake = this.makes.find(m=>m.id==this.vehicle.makeId);
