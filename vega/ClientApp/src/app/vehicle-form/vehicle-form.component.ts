@@ -1,3 +1,5 @@
+import * as _ from 'underscore';
+import { SaveVehicle, Vehicle } from './../models/vehicle';
 import { Observable } from 'rxjs';
 import { VehicleService } from './../services/vehicle.service';
 import { Component, OnInit } from '@angular/core';
@@ -14,9 +16,17 @@ export class VehicleFormComponent implements OnInit {
 makes: any;
 models: any[];
 features: any;
-  vehicle: any = {
+  vehicle: SaveVehicle = {
+    id: 0,
+    makeId: 0,
+    modelId: 0,
+    isRegistered: false,
     features: [], 
-    contact: {}
+    contact: {
+      name: '',
+      phone:'',
+      email: ''
+    }
   };
   constructor(
     private route: ActivatedRoute,
@@ -40,17 +50,31 @@ features: any;
     Observable.forkJoin(sources).subscribe(data=>{
       this.makes = data[0];
       this.features = data[1];
-      if(this.vehicle.id)
-        this.vehicle = data[2];
+      if(this.vehicle.id){
+        this.setVehicle(data[2]);
+        this.populateModels();
+      }
     }, err=>{
       if(err.status == 404)
       this.router.navigate(['/']);
     });
+
+ }
+ private setVehicle(v: Vehicle){
+   this.vehicle.id = v.id;
+   this.vehicle.makeId = v.make.id;
+   this.vehicle.modelId = v.model.id;
+   this.vehicle.isRegistered = v.isRegistered;
+  this.vehicle.contact = v.contact;
+  this.vehicle.features = _.pluck(v.features, 'id');
  }
  onMakeChange(){
- var selectedMake = this.makes.find(m=>m.id==this.vehicle.makeId);
-   this.models = selectedMake ? selectedMake.models : [];
+    this.populateModels();
    delete this.vehicle.modelId;
+    }
+    private populateModels(){
+      var selectedMake = this.makes.find(m=>m.id==this.vehicle.makeId);
+      this.models = selectedMake ? selectedMake.models : [];
     }
   onFeatureToggle(featureId, $event) {
     if ($event.target.checked)
@@ -61,8 +85,20 @@ features: any;
     }
   }
 submit(){
-this.vehicleService.create(this.vehicle)
-.subscribe(
-  x=>console.log(x))
+  if(this.vehicle.id){
+  this.vehicleService.update(this.vehicle)
+  .subscribe(x=>{
+    this.toastyService.success({
+      title: 'Success',
+      msg:'Update was successfuly updated',
+      theme: 'bootstrap',
+      showClose: true,
+      timeout: 5000
+    });
+  });
+}
+  else{
+    this.vehicleService.create(this.vehicle)
+    .subscribe(x=>console.log(x))};
   }
 }
