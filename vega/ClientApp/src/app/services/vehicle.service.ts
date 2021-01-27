@@ -27,4 +27,8 @@ export class VehicleService {
    return this.http.put('/api/vehicles/'+ vehicle.id, vehicle)
    .pipe(map((res: Response)=>res.json()));
  }
+ delete(id: number){
+  return this.http.delete('/api/vehicles/' +id)
+  // .pipe(map((res: Response)=>res.json()));
+ }
 }
