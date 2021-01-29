@@ -1,3 +1,4 @@
+import { VehicleListComponent } from './vehicle-list/vehicle-list';
 import * as Sentry from "@sentry/angular";
 import { VehicleService } from './services/vehicle.service';
 import { BrowserModule } from '@angular/platform-browser';
@@ -29,7 +30,8 @@ Sentry.init({
     HomeComponent,
     CounterComponent,
     FetchDataComponent,
-    VehicleFormComponent
+    VehicleFormComponent,
+    VehicleListComponent
   ],
   imports: [
     FormsModule,
@@ -38,9 +40,10 @@ Sentry.init({
     HttpClientModule,
     
     RouterModule.forRoot([
-    { path: '', component: HomeComponent, pathMatch: 'full' },
+    { path: '',  component: HomeComponent, pathMatch: 'full' },
     { path: 'vehicles/new', component: VehicleFormComponent },
     { path: 'vehicles/:id', component: VehicleFormComponent },
+    { path: 'vehicles', component: VehicleListComponent },
     { path: 'counter', component: CounterComponent },
     { path: 'fetch-data', component: FetchDataComponent },
 ], { relativeLinkResolution: 'legacy' })

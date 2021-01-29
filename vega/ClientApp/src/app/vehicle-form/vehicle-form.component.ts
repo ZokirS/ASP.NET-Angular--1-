@@ -1,6 +1,6 @@
 import * as _ from 'underscore';
 import { SaveVehicle, Vehicle } from './../models/vehicle';
-import { Observable } from 'rxjs';
+import { Observable } from 'rxjs/Observable';
 import { VehicleService } from './../services/vehicle.service';
 import { Component, OnInit } from '@angular/core';
 import { ToastyService } from 'ng2-toasty';
@@ -47,27 +47,28 @@ features: any;
     if(this.vehicle.id)
       sources.push(this.vehicleService.getVehicle(this.vehicle.id));
 
-    Observable.forkJoin(sources).subscribe(data=>{
-      this.makes = data[0];
-      this.features = data[1];
-      if(this.vehicle.id){
-        this.setVehicle(data[2]);
-        this.populateModels();
-      }
-    }, err=>{
-      if(err.status == 404)
-      this.router.navigate(['/']);
-    });
+      Observable.forkJoin(sources).subscribe(data => {
+        this.makes = data[0];
+        this.features = data[1];
+  
+        if (this.vehicle.id) {
+          this.setVehicle(data[2]);
+          this.populateModels();
+        }
+      }, err => {
+        if (err.status == 404)
+          this.router.navigate(['/']);
+      });
 
  }
- private setVehicle(v: Vehicle){
-   this.vehicle.id = v.id;
-   this.vehicle.makeId = v.make.id;
-   this.vehicle.modelId = v.model.id;
-   this.vehicle.isRegistered = v.isRegistered;
+ private setVehicle(v){
+  this.vehicle.id = v.id;
+  this.vehicle.makeId = v.make.id;
+  this.vehicle.modelId = v.model.id;
+  this.vehicle.isRegistered = v.isRegistered;
   this.vehicle.contact = v.contact;
   this.vehicle.features = _.pluck(v.features, 'id');
- }
+} 
  onMakeChange(){
     this.populateModels();
    delete this.vehicle.modelId;

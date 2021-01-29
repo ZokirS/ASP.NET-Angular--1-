@@ -7,6 +7,7 @@ import {Observable} from 'rxjs';
 
 @Injectable()
 export class VehicleService {
+  private readonly vehiclesEndpoint = '/api/vehicles';
 
   constructor(private http: HttpClient) { }
 
@@ -31,4 +32,17 @@ export class VehicleService {
   return this.http.delete('/api/vehicles/' +id)
   // .pipe(map((res: Response)=>res.json()));
  }
+ getVehicles() {
+  return this.http.get('/vehicles/')
+}
+toQueryString(obj) {
+  var parts = [];
+  for (var property in obj) {
+    var value = obj[property];
+    if (value != null && value != undefined) 
+      parts.push(encodeURIComponent(property) + '=' + encodeURIComponent(value));
+  }
+
+  return parts.join('&');
+}
 }
