@@ -33,16 +33,6 @@ export class VehicleService {
   // .pipe(map((res: Response)=>res.json()));
  }
  getVehicles() {
-  return this.http.get('/vehicles/')
-}
-toQueryString(obj) {
-  var parts = [];
-  for (var property in obj) {
-    var value = obj[property];
-    if (value != null && value != undefined) 
-      parts.push(encodeURIComponent(property) + '=' + encodeURIComponent(value));
-  }
-
-  return parts.join('&');
+  return this.http.get('/api/vehicles');
 }
 }

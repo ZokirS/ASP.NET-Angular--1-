@@ -61,7 +61,7 @@ features: any;
       });
 
  }
- private setVehicle(v){
+ private setVehicle(v:Vehicle){
   this.vehicle.id = v.id;
   this.vehicle.makeId = v.make.id;
   this.vehicle.modelId = v.model.id;

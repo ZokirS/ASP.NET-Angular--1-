@@ -18,11 +18,11 @@ import { VehicleFormComponent } from './vehicle-form/vehicle-form.component';
 import { AppErrorHandler } from './app.error-handler';
 import { Integrations } from "@sentry/angular";
 
-Sentry.init({
-  dsn: "https://b376036fd2564e868708886777f4370b@o509662.ingest.sentry.io/5604521",
-  maxBreadcrumbs: 50,
-  debug: true,
-});
+//Sentry.init({
+ // dsn: "https://b376036fd2564e868708886777f4370b@o509662.ingest.sentry.io/5604521",
+ // maxBreadcrumbs: 50,
+ // debug: true,
+// });
 @NgModule({
   declarations: [
     AppComponent,

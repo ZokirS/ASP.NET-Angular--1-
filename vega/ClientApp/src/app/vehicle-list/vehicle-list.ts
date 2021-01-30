@@ -5,7 +5,8 @@ import { any } from 'underscore';
 
 
 @Component({
-    templateUrl: 'vehicle-list.html'
+    selector: 'app-vehicle-list',
+    templateUrl: './vehicle-list.html'
 })
 export class VehicleListComponent implements OnInit{
     vehicles: Vehicle[];
@@ -24,7 +25,7 @@ export class VehicleListComponent implements OnInit{
     } 
 
     onFilterChange(){
-        var vehicle= this.allVehicles;
+        var vehicle = this.allVehicles;
         if(this.filter.makeId)
         vehicle = vehicle.filter(v=>v.make.id == this.filter.makeId);
 

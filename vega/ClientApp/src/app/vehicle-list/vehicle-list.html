@@ -5,9 +5,9 @@
 <div class="well">
 <div class="form-group" [(ngModel)]="filter.makeId" (change)="onFilterChange()">
     <label for="make">Make</label>
-    <select name="" id="make" class="form-control well">
+    <select name="make" id="make" class="form-control">
         <option value=""></option>
-        <option *ngFor="let m of makes" value="{{ m.id }}">{{ m.name }}</option>
+        <option *ngFor="let m of make" value="{{ m.id }}">{{ m.name }}</option>
     </select>
 </div>
 <button class="btn btn-default" (change)="resetFilter()">Reset</button>
@@ -22,4 +22,12 @@
             <th></th>
         </tr>
     </thead>
+    <tbody>
+        <tr ng-repeat="m of vehicles" >
+            <th>{{ m.id}}</th>
+            <th>{{ m.name}}</th>
+            <th>{{ m.model.name}}</th>
+            <th>{{ m.contact.name}}</th>
+        </tr>
+    </tbody>
 </table>
